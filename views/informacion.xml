@@ -5,6 +5,10 @@
       <field name="model">odoo_basico.informacion</field>
       <field name="arch" type="xml">
         <form string="Formulario información">
+          <header>
+            <button name="boton1" type="object" string="Ver altura" />
+            <button name="boton2" type="object" string="Autoriza/Non" class="oe_highlight" />
+          </header>
           <sheet>
             <group>
               <field name="name"/>

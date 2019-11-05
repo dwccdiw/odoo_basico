@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import Warning
+from odoo.exceptions import ValidationError
 
 # class odoo_basico(models.Model):
 #     _name = 'odoo_basico.odoo_basico'
@@ -35,6 +37,33 @@ class informacion (models.Model):
     # nacionalidade = fields.Many2one ('res.country', string='Nacionalidade')
     # moeda_id = fields.Many2one ('res.currency')
     # custo_por_hora = fields.Monetary ("Custo por hora", 'moeda_id')
+
+
+    @api.multi
+    def boton1(self):  # é necesario engadir no xml da vista no header o botón
+        self.ensure_one ()
+        for informacion in self:
+            if informacion.alto_en_cms < 10 or informacion.alto_en_cms > 20:
+                raise Warning ( #Ao usar warning temos que importar a libreria
+                'O alto de %s non está entre 10 e 20' % informacion.name)
+            else:
+                raise Warning (
+                    'Altura de %s correcta' % informacion.name)
+        return True
+
+    @api.multi
+    def boton2(self):  # é necesario engadir no xml da vista no header o botón
+        for informacion in self:
+            informacion.autorizado = not informacion.autorizado
+        return True
+
     @api.depends ('alto_en_cms','longo_en_cms','ancho_en_cms')
     def _volume(self):
         self.volume = float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms)
+
+    @api.constrains ('peso') #Ao usar constrains temos que importar a libreria ValidationError
+    def _constrain_peso(self):
+        for informacion in self:
+            if self.peso < 1 or self.peso > 4:
+                raise ValidationError (
+                    'O peso de %s ten que ser entre 1 e 4 ' % informacion.name)
