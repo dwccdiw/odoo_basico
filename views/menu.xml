@@ -15,7 +15,7 @@
           action="odoo_basico.action_server"/>
 -->
 <odoo>
-    <menuitem id="main_odoo_basico" name="Odoo básico. Exemplos"/>
-    <menuitem id="exemplos_menu" name="Menú de Exemplos" parent="main_odoo_basico"/>
-    <menuitem id="informacion_menu" name="Infomacion" parent="exemplos_menu" action="informacion_list_action"/>
+    <menuitem id="main_odoo_basico" name="Menú Nivel 0"/>
+    <menuitem id="exemplos_menu" name="Menú Nivel 1" parent="main_odoo_basico"/>
+    <menuitem id="informacion_menu" name="Menú Nivel 2" parent="exemplos_menu" action="informacion_list_action"/>
 </odoo>

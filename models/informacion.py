@@ -20,8 +20,11 @@ class informacion (models.Model):
     name = fields.Char(required=True,size=20,string="Título")#IMPORTANTE o campo ten que chamarse name para visualizalo
     descripcion = fields.Text(string="A Descripción")
     autorizado = fields.Boolean(string="¿Autorizado?", default=True)
-    altura_en_cms = fields.Integer(string="Altura en centímetros")
-    peso = fields.Float(digits=(6, 2), string="Peso", default=2.7)
+    alto_en_cms = fields.Integer(string="Alto en centímetros")
+    longo_en_cms = fields.Integer (string="Longo en centímetros")
+    ancho_en_cms = fields.Integer (string="Ancho en centímetros")
+    volume = fields.Float (compute="_volume", store=True)
+    peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
     data_sesion = fields.Datetime(string="Data da Sesión", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     foto = fields.Binary(string='Foto')
 
@@ -32,3 +35,6 @@ class informacion (models.Model):
     # nacionalidade = fields.Many2one ('res.country', string='Nacionalidade')
     # moeda_id = fields.Many2one ('res.currency')
     # custo_por_hora = fields.Monetary ("Custo por hora", 'moeda_id')
+    @api.depends ('alto_en_cms','longo_en_cms','ancho_en_cms')
+    def _volume(self):
+        self.volume = float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms)
