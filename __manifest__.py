@@ -16,8 +16,8 @@
     'depends': ['base'],
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
         'views/informacion.xml',
+        'views/relacion.xml',
         'views/templates.xml',
         'views/menu.xml',
         'security/ir.model.access.csv',

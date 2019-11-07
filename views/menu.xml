@@ -17,5 +17,6 @@
 <odoo>
     <menuitem id="main_odoo_basico" name="Menú Nivel 0"/>
     <menuitem id="exemplos_menu" name="Menú Nivel 1" parent="main_odoo_basico"/>
-    <menuitem id="informacion_menu" name="Menú Nivel 2" parent="exemplos_menu" action="informacion_list_action"/>
+    <menuitem id="informacion_menu" name="Menú Nivel 2 Información" parent="exemplos_menu" action="informacion_list_action"/>
+    <menuitem id="relacion_menu" name="Menú Nivel 2 Relación" parent="exemplos_menu" action="relacion_list_action"/>
 </odoo>

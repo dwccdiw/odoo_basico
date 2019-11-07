@@ -29,6 +29,8 @@ class informacion (models.Model):
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
     data_sesion = fields.Datetime(string="Data da Sesión", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     foto = fields.Binary(string='Foto')
+    adxunto_nome = fields.Char(string="Nome Adxunto")
+    adxunto = fields.Binary(string="Arquivo adxunto")
     sexo = fields.Selection([('Home', 'Home'), ('Muller', 'Muller'), ('Outros', 'Outros')], string='Sexo')
     sexo_traducido = fields.Selection([('male', 'Home'), ('female', 'Muller'), ('others', 'Outros')], string='Sexo')
 
