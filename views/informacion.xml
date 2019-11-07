@@ -19,6 +19,7 @@
               <notebook>
                 <page string="Datos xeraís">
                   <group>
+                    <field name="sexo"/>
                     <field name="sexo_traducido"/>
                     <field name="data_sesion"/>
                     <field name="foto" widget="image" class="oe_avatar"/>

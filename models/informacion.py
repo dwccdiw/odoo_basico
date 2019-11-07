@@ -29,8 +29,7 @@ class informacion (models.Model):
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
     data_sesion = fields.Datetime(string="Data da Sesión", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     foto = fields.Binary(string='Foto')
-
-   # sexo = fields.Selection(['Home', 'Muller', 'Outros'], string='Sexo')
+    sexo = fields.Selection([('Home', 'Home'), ('Muller', 'Muller'), ('Outros', 'Outros')], string='Sexo')
     sexo_traducido = fields.Selection([('male', 'Home'), ('female', 'Muller'), ('others', 'Outros')], string='Sexo')
 
 
