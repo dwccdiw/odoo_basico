@@ -10,24 +10,41 @@
             <button name="boton2" type="object" string="Autoriza/Non" class="oe_highlight" />
           </header>
           <sheet>
-            <group colspan="12" rowspan="15" col="3" >
+            <group colspan="6" col="6" >
+              <separator colspan="2"/>
               <field name="name"/>
-              <field name="descripcion"/>
-              <field name="autorizado"/>
+              <separator colspan="2"/>
             </group>
-            <group>
-              <notebook>
-                <page string="Datos xeraís">
+            <group >
+              <field  name="descripcion"/>
+              <field  name="autorizado"/>
+            </group>
+            <group colspan="5" col="5"> <!-- Ao poñer máis de 4 columnas os fields en lugar de tr pasan a ser td -->
+              <field  name="descripcion"/>
+              <field  name="autorizado"/>
+            </group>
+            <notebook>
+              <page string="Datos xeraís">
+                <group>
                   <group>
                     <field name="sexo"/>
                     <field name="sexo_traducido"/>
                     <field name="data_sesion"/>
+                  </group>
+                  <group>
                     <field name="foto" widget="image" class="oe_avatar"/>
                     <field name="adxunto_nome" invisible="1" />
                     <field name="adxunto" filename="adxunto_nome" />
                   </group>
-                </page>
-                <page string="Dimensións">
+                </group>
+              </page>
+              <page string="Dimensións">
+                <group > <!-- Cada group é unha táboa, por defecto ten 4 columnas. E cada field ocupa 2 columnas unha
+                                    para etiqueta e outra para datos -->
+                  <group />
+                  <group >
+                    <field name="volume"/>
+                  </group>
                   <group colspan="10"  col="10" >
                     <field name="alto_en_cms"/>
                     <field name="longo_en_cms"/>
@@ -38,34 +55,19 @@
                     <field name="longo_en_cms"/>
                     <field name="ancho_en_cms"/>
                   </group>
-                  <group  colspan = "8" col="8" >
+                  <group  colspan = "8" col="8" > <!-- Cantas máis columnas mais pequeno fai o campo de datos e canto máis pequeno
+                                                           o campo de datos máis grande o de etiqueta-->
+                                                     <!-- Ao ser dinámico se os datos non caben baixan a fila de abaixo-->
                     <field name="alto_en_cms"/>
                     <field name="longo_en_cms"/>
                     <field name="ancho_en_cms"/>
                   </group>
-                  <group  colspan="12" col="12" >
-                    <separator colspan="6"/>
-                    <field  colspan="6" name="volume"/>
-                  </group>
-                  <group  colspan="10" col="10">
-                    <separator colspan="5"/>
-                    <field  colspan="5" name="volume"/>
-                  </group>
-                  <group  colspan="8" col="8">
-                    <separator colspan="4"/>
-                    <field  colspan="4" name="volume"/>
-                  </group>
-                  <group colspan="4"  col="4">
-                    <separator />
-                    <field name="peso"/>
-                  </group>
-                  <group >
-                    <field name="peso"/>
-                  </group>
-
-                </page>
-              </notebook>
-            </group>
+                </group>
+                <group >
+                  <field name="peso"/>
+                </group>
+              </page>
+            </notebook>
           </sheet>
         </form>
       </field>

@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 odoo_basico_informacion,odoo_basico.informacion,model_odoo_basico_informacion,base.group_user,1,1,1,1
 odoo_basico_relacion,odoo_basico.relacion,model_odoo_basico_relacion,base.group_user,1,1,1,1
+odoo_basico_factura,odoo_basico.factura,model_odoo_basico_factura,base.group_user,1,1,1,1
+odoo_basico_mezcla_lineas,odoo_basico.mezcla_lineas,model_odoo_basico_mezcla_lineas,base.group_user,1,1,1,1
+odoo_basico_linea,odoo_basico.linea,model_odoo_basico_linea,base.group_user,1,1,1,1
+odoo_basico_un_a_un,odoo_basico.un_a_un,model_odoo_basico_un_a_un,base.group_user,1,1,1,1
