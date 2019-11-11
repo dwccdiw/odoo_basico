@@ -55,21 +55,23 @@ class informacion (models.Model):
 
     #@api.multi
     def boton2(self):  # é necesario engadir no xml da vista no header o botón
-        for informacion in self:
-            informacion.autorizado = not informacion.autorizado
+        for rexistro in self:
+            rexistro.autorizado = not rexistro.autorizado
         return True
 
     @api.depends ('alto_en_cms','longo_en_cms','ancho_en_cms')
     def _volume(self):
-        self.volume = float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms)
+        for rexistro in self:
+            rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)
 
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume_entre_100(self):
-         self.volume_entre_100 = (float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms))/100
+        for rexistro in self:
+            rexistro.volume_entre_100 = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms))/100
 
     @api.constrains ('peso') #Ao usar constrains temos que importar a libreria ValidationError
     def _constrain_peso(self):
-        for informacion in self:
-            if self.peso < 1 or self.peso > 4:
+        for rexistro in self:
+            if rexistro.peso < 1 or rexistro.peso > 4:
                 raise ValidationError (
-                    'O peso de %s ten que ser entre 1 e 4 ' % informacion.name)
+                    'O peso de %s ten que ser entre 1 e 4 ' % rexistro.name)
