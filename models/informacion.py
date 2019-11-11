@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo.exceptions import Warning
-from odoo.exceptions import ValidationError
+from odoo.exceptions import Warning #Ao usar warning temos que importar a libreria
+from odoo.exceptions import ValidationError #Ao usar constrains temos que importar a libreria ValidationError
 
 # class odoo_basico(models.Model):
 #     _name = 'odoo_basico.odoo_basico'
@@ -26,6 +26,7 @@ class informacion (models.Model):
     longo_en_cms = fields.Integer (string="Longo en centímetros")
     ancho_en_cms = fields.Integer (string="Ancho en centímetros")
     volume = fields.Float (compute="_volume", store=True)
+    volume_entre_100 = fields.Float(compute="_volume_entre_100", store=True)
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
     data_sesion = fields.Datetime(string="Data da Sesión", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     foto = fields.Binary(string='Foto')
@@ -40,7 +41,7 @@ class informacion (models.Model):
     # custo_por_hora = fields.Monetary ("Custo por hora", 'moeda_id')
 
 
-    @api.multi
+    #@api.multi é a opción por defecto non temos que declarala
     def boton1(self):  # é necesario engadir no xml da vista no header o botón
         self.ensure_one ()
         for informacion in self:
@@ -52,7 +53,7 @@ class informacion (models.Model):
                     'Altura de %s correcta' % informacion.name)
         return True
 
-    @api.multi
+    #@api.multi
     def boton2(self):  # é necesario engadir no xml da vista no header o botón
         for informacion in self:
             informacion.autorizado = not informacion.autorizado
@@ -61,6 +62,10 @@ class informacion (models.Model):
     @api.depends ('alto_en_cms','longo_en_cms','ancho_en_cms')
     def _volume(self):
         self.volume = float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms)
+
+    @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
+    def _volume_entre_100(self):
+         self.volume_entre_100 = (float(self.alto_en_cms) * float(self.longo_en_cms) * float(self.ancho_en_cms))/100
 
     @api.constrains ('peso') #Ao usar constrains temos que importar a libreria ValidationError
     def _constrain_peso(self):
