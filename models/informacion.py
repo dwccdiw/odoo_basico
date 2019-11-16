@@ -25,10 +25,13 @@ class informacion (models.Model):
     alto_en_cms = fields.Integer(string="Alto en centímetros")
     longo_en_cms = fields.Integer (string="Longo en centímetros")
     ancho_en_cms = fields.Integer (string="Ancho en centímetros")
-    volume = fields.Float (compute="_volume", store=True)
+    volume = fields.Float (compute="_volume", store=False)
     volume_entre_100 = fields.Float(compute="_volume_entre_100", store=True)
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
-    data_sesion = fields.Datetime(string="Data da Sesión", default=lambda self: fields.Datetime.now()) #w3schools lambda function
+    data = fields.Date (string="Data",default=lambda self: fields.Date.today ())  # w3schools lambda function
+    data_hora = fields.Datetime(string="Data e Hora", default=lambda self: fields.Datetime.now()) #w3schools lambda function
+    mes_date = fields.Char(compute="_mes_date",size=15,store=False)
+    mes_datetime = fields.Char(compute="_mes_datetime",size=15,store=False)
     foto = fields.Binary(string='Foto')
     adxunto_nome = fields.Char(string="Nome Adxunto")
     adxunto = fields.Binary(string="Arquivo adxunto")
@@ -47,7 +50,7 @@ class informacion (models.Model):
         for informacion in self:
             if informacion.alto_en_cms < 10 or informacion.alto_en_cms > 20:
                 raise Warning ( #Ao usar warning temos que importar a libreria
-                'O alto de %s non está entre 10 e 20' % informacion.name)
+                    'O alto de %s non está entre 10 e 20' % informacion.name)
             else:
                 raise Warning (
                     'Altura de %s correcta' % informacion.name)
@@ -59,6 +62,16 @@ class informacion (models.Model):
             rexistro.autorizado = not rexistro.autorizado
         return True
 
+    @api.depends('data')#cambios nunha táboa relacionada
+    def _mes_date(self):
+        for rexistro in self:
+           rexistro.mes_date = rexistro.data.strftime("%B")
+
+    @api.onchange('data_hora')#cambios na mesma táboa
+    def _mes_datetime(self):
+        for rexistro in self:
+            rexistro.mes_datetime = rexistro.data_hora.strftime("%B")
+
     @api.depends ('alto_en_cms','longo_en_cms','ancho_en_cms')
     def _volume(self):
         for rexistro in self:
@@ -69,7 +82,7 @@ class informacion (models.Model):
         for rexistro in self:
             rexistro.volume_entre_100 = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms))/100
 
-    @api.constrains ('peso') #Ao usar constrains temos que importar a libreria ValidationError
+    @api.constrains('peso') #Ao usar constrains temos que importar a libreria ValidationError
     def _constrain_peso(self):
         for rexistro in self:
             if rexistro.peso < 1 or rexistro.peso > 4:

@@ -45,7 +45,8 @@
             <field name="name">Rexistro 1</field>
             <field name="descripcion">Descripción Rexistro 1</field>
             <field name="autorizado">True</field>
-            <field name="data_sesion">25.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data">10.10.2020</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data_hora">10.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
             <field name="sexo">Home</field>
             <field name="alto_en_cms">3</field>
             <field name="longo_en_cms">2</field>
@@ -55,7 +56,8 @@
             <field name="name">Rexistro 2</field>
             <field name="descripcion">Descripción Rexistro 2</field>
             <field name="autorizado">True</field>
-            <field name="data_sesion">25.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data">10.10.2020</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data_hora">10.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
             <field name="sexo">Home</field>
             <field name="alto_en_cms">3</field>
             <field name="longo_en_cms">2</field>
@@ -65,7 +67,9 @@
             <field name="name">Rexistro 3</field>
             <field name="descripcion">Descripción Rexistro 1</field>
             <field name="autorizado">False</field>
-            <field name="data_sesion">25.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data">10.10.2020</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data_hora">10.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+
             <field name="sexo">Home</field>
             <field name="alto_en_cms">3</field>
             <field name="longo_en_cms">2</field>
@@ -75,7 +79,8 @@
             <field name="name">Rexistro 4</field>
             <field name="descripcion">Descripción Rexistro 1</field>
             <field name="autorizado">False</field>
-            <field name="data_sesion">25.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data">10.10.2020</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
+            <field name="data_hora">10.10.2020 16:00:00</field><!--Cambiar o formato en postgres co comando "sudo -u postgres psql" e "set datestyle to DMY;" -->
             <field name="sexo">Home</field>
             <field name="alto_en_cms">3</field>
             <field name="longo_en_cms">2</field>

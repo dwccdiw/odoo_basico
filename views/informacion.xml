@@ -29,7 +29,10 @@
                   <group>
                     <field name="sexo"/>
                     <field name="sexo_traducido"/>
-                    <field name="data_sesion"/>
+                    <field name="data"/>
+                    <field name="mes_date"/>
+                    <field name="data_hora"/>
+                    <field name="mes_datetime"/>
                   </group>
                   <group>
                     <field name="foto" widget="image" class="oe_avatar"/>
@@ -57,7 +60,7 @@
                   </group>
                   <group  colspan = "8" col="8" > <!-- Cantas máis columnas mais pequeno fai o campo de datos e canto máis pequeno
                                                            o campo de datos máis grande o de etiqueta-->
-                                                     <!-- Ao ser dinámico se os datos non caben baixan a fila de abaixo-->
+                    <!-- Ao ser dinámico se os datos non caben baixan a fila de abaixo-->
                     <field name="alto_en_cms"/>
                     <field name="longo_en_cms"/>
                     <field name="ancho_en_cms"/>
@@ -81,7 +84,8 @@
         <tree string="informaicon Tree">
           <field name="name"/>
           <field name="descripcion"/>
-          <field name="data_sesion"/>
+          <field name="data"/>
+          <field name="data_hora"/>
         </tree>
       </field>
     </record>
