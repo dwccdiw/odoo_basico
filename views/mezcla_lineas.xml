@@ -10,7 +10,7 @@
           <sheet>
             <group>
               <field name="name"/>
-              <field name="linea_ids"/>
+              <field name="linea_ids" options="{'no_create': True}"/><!-- para que non ter o botón crear nova liña dende esta vista-->
             </group>
           </sheet>
         </form>

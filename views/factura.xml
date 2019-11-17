@@ -10,14 +10,12 @@
           <sheet>
             <group>
               <field name="name"/>
-              <field name="linea_ids"/>
-              <field name="un_a_un_id"/>
+              <field name="data_factura"/>
             </group>
           </sheet>
         </form>
       </field>
     </record>
-
 
     <record model="ir.ui.view" id="factura_tree_view">
       <field name="name">factura.tree</field>

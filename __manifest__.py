@@ -16,9 +16,9 @@
     'depends': ['base'],
     # always loaded
     'data': [
-        'views/un_a_un.xml',
-        'views/mezcla_lineas.xml',
         'views/factura.xml',
+        'views/mezcla_lineas.xml',
+        'views/cabeceira.xml',
         'views/linea.xml',
         'views/informacion.xml',
         'views/relacion.xml',

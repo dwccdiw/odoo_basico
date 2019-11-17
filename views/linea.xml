@@ -10,7 +10,7 @@
           <sheet>
             <group>
               <field name="descripcion_da_liña"/>
-              <field name="name_da_factura"/>
+              <field name="name_da_cabeceira"/>
             </group>
           </sheet>
         </form>
