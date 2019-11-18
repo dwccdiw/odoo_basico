@@ -20,6 +20,6 @@
     <menuitem id="informacion_menu" name="Menú Nivel 2 Información" parent="exemplos_menu" action="informacion_list_action"/>
     <menuitem id="relacion_menu" name="Menú Nivel 2 Relación" parent="exemplos_menu" action="relacion_list_action"/>
     <menuitem id="cabeceira_menu" name="Menú Nivel 2 Pedido" parent="exemplos_menu" action="cabeceira_list_action"/>
-   <!-- <menuitem id="un_a_un_lineas_menu" name="Menú Nivel 2 Un a Un" parent="exemplos_menu" action="un_a_un_list_action"/>-->
+    <menuitem id="factura_menu" name="Menú Nivel 2 Factura" parent="exemplos_menu" action="factura_list_action"/>-->
     <menuitem id="mezcla_lineas_menu" name="Menú Nivel 2 Mezcla Lineas" parent="exemplos_menu" action="mezcla_lineas_list_action"/>
 </odoo>

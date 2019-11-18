@@ -11,7 +11,7 @@
             <group>
               <field name="name"/>
               <field name="linea_ids"/>
-              <field name="factura_id" domain="[('id', '=', -1)]"/>
+              <!--<field name="factura_id" domain="[('id', '=', -1)]"/>-->
               <!-- Para que so mostre a opción de crear e non se vexan os rexistros xa creados)
               domain é un filtro, co cal so mostra os rexistros de factura que non están creados é decir ningún
               attrs="{'invisible': [('factura_id','=',True)]} non parece necesario "

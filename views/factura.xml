@@ -11,6 +11,7 @@
             <group>
               <field name="name"/>
               <field name="data_factura"/>
+              <field name="cabeceira_id" domain="[('factura_id', '=', False)]"/>
             </group>
           </sheet>
         </form>

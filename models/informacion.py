@@ -62,7 +62,7 @@ class informacion (models.Model):
             rexistro.autorizado = not rexistro.autorizado
         return True
 
-    @api.depends('data')#cambios nunha táboa relacionada
+    @api.depends('data')# permite cambios nunha táboa relacionada
     def _mes_date(self):
         for rexistro in self:
            rexistro.mes_date = rexistro.data.strftime("%B")
