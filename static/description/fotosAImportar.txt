@@ -1,0 +1,3 @@
+"odoo_basico.odoo_basico informacion 1"|"icon.png"
+"odoo_basico.odoo_basico informacion 2"|"foto.png"
+"odoo_basico.odoo_basico informacion 3"|"foto.png"
