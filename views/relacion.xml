@@ -13,6 +13,8 @@
               <field name="orzamento"/>
               <field name="moeda_id"/>
               <field name="informacion_ids"/>
+<!--               <field name="orzamento_euros"/>-->
+<!--               <field name="moeda_euro_id"/>-->
             </group>
           </sheet>
         </form>
