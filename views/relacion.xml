@@ -10,11 +10,11 @@
           <sheet>
             <group>
               <field name="name"/>
-              <field name="orzamento"/>
+              <field name="gasto"/>
               <field name="moeda_id"/>
               <field name="informacion_ids"/>
               <field name="moeda_euro_id"  invisible="1"/>
-              <field name="orzamento_en_euros"/>
+              <field name="gasto_en_euros"/>
             </group>
           </sheet>
         </form>
@@ -28,6 +28,8 @@
       <field name="arch" type="xml">
         <tree string="informaicon Tree">
           <field name="name"/>
+          <field name="moeda_euro_id"  invisible="1"/>
+          <field name="gasto_en_euros"/>
         </tree>
       </field>
     </record>

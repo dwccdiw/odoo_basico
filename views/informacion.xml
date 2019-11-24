@@ -82,11 +82,13 @@
       <field name="name">informacion.tree</field>
       <field name="model">odoo_basico.informacion</field>
       <field name="arch" type="xml">
-        <tree string="informaicon Tree">
+        <tree string="informacion Tree">
           <field name="name"/>
           <field name="descripcion"/>
           <field name="data"/>
           <field name="data_hora"/>
+          <field name="sexo"/>
+          <field name="autorizado"/>
         </tree>
       </field>
     </record>
