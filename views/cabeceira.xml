@@ -48,7 +48,7 @@
       <field name="res_model">odoo_basico.cabeceira</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
-      <field name="domain">[('factura_id', '=',False)]</field>
+      <field name="domain">[('factura_id', '=',False)]</field><!--Para que só se vexan os pedidos sen facturar-->
       <field name="help" type="html">
         <p class="o_view_nocontent_smiling_face">Tes que crear o primeiro rexistro</p>
       </field>

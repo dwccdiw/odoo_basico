@@ -20,7 +20,6 @@ class relacion (models.Model):
 
     moeda_euro_id = fields.Many2one ('res.currency',default=lambda self: self.env['res.currency'].search([('name', '=', "EUR")], limit=1))
     gasto_en_euros = fields.Monetary ("Gasto en Euros", 'moeda_euro_id')
-
     # Outra solución na que non se almacena na BD o campo 'moeda_euro_id' sería:
 
     #moeda_euro_id = fields.Many2one ('res.currency', compute='_eur')
@@ -30,3 +29,4 @@ class relacion (models.Model):
     # def _eur(self):
     #    for rexistro in self:
     #      rexistro.moeda_euro_id = rexistro.env['res.currency'].search ([('name', '=', "EUR")], limit=1)
+    nome_creador_moeda = fields.Char (related='moeda_id.create_uid.login', string="Creador Moeda",store=True)

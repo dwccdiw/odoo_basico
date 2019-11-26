@@ -15,6 +15,7 @@
               <field name="informacion_ids"/>
               <field name="moeda_euro_id"  invisible="1"/>
               <field name="gasto_en_euros"/>
+              <field name="nome_creador_moeda"/>
             </group>
           </sheet>
         </form>

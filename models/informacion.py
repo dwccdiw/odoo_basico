@@ -4,17 +4,6 @@ from odoo import models, fields, api
 from odoo.exceptions import Warning #Ao usar warning temos que importar a libreria
 from odoo.exceptions import ValidationError #Ao usar constrains temos que importar a libreria ValidationError
 
-# class odoo_basico(models.Model):
-#     _name = 'odoo_basico.odoo_basico'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
 class informacion (models.Model):
     _name = "odoo_basico.informacion" #IMPORTANTE é o nome da táboa
     _description = "Exemplos de atributos"
@@ -28,6 +17,7 @@ class informacion (models.Model):
     volume = fields.Float (compute="_volume", store=False)
     volume_entre_100 = fields.Float(compute="_volume_entre_100", store=True)
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
+    densidade = fields.Float (compute="_densidade", store=True)
     data = fields.Date (string="Data",default=lambda self: fields.Date.today ())  # w3schools lambda function
     data_hora = fields.Datetime(string="Data e Hora", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     mes_date = fields.Char(compute="_mes_date",size=15,store=False)
@@ -39,12 +29,8 @@ class informacion (models.Model):
     sexo_traducido = fields.Selection([('Hombre', 'Home'), ('Mujer', 'Muller'), ('Otros', 'Outros')], string='Sexo')
 
 
-    # nacionalidade = fields.Many2one ('res.country', string='Nacionalidade')
-    # moeda_id = fields.Many2one ('res.currency')
-    # custo_por_hora = fields.Monetary ("Custo por hora", 'moeda_id')
 
-
-    #@api.multi é a opción por defecto non temos que declarala
+       #@api.multi é a opción por defecto non temos que declarala
     def boton1(self):  # é necesario engadir no xml da vista no header o botón
         self.ensure_one ()
         for informacion in self:
@@ -81,6 +67,11 @@ class informacion (models.Model):
     def _volume_entre_100(self):
         for rexistro in self:
             rexistro.volume_entre_100 = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms))/100
+
+    @api.depends ('volume', 'peso')
+    def _densidade(self):
+        for rexistro in self:
+            rexistro.densidade = 100 * float (rexistro.peso) / float (rexistro.volume)
 
     @api.constrains('peso') #Ao usar constrains temos que importar a libreria ValidationError
     def _constrain_peso(self):

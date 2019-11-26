@@ -47,7 +47,9 @@
                                     para etiqueta e outra para datos -->
                   <group />
                   <group >
+                    <field name="peso"/>
                     <field name="volume"/>
+                    <field name="densidade" widget="progressbar"/>
                   </group>
                   <group colspan="10"  col="10" >
                     <field name="alto_en_cms"/>
