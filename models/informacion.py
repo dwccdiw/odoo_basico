@@ -14,21 +14,21 @@ class informacion (models.Model):
     alto_en_cms = fields.Integer(string="Alto en centímetros")
     longo_en_cms = fields.Integer (string="Longo en centímetros")
     ancho_en_cms = fields.Integer (string="Ancho en centímetros")
-    volume = fields.Float (compute="_volume", store=False)
-    volume_entre_100 = fields.Float(compute="_volume_entre_100", store=True)
+    volume = fields.Float (compute="_volume", store=True,default=0)
+    volume_entre_100 = fields.Float(compute="_volume_entre_100", store=False)
     peso = fields.Float(digits=(6, 2), string="Peso en Kg.s", default=2.7)
     densidade = fields.Float (compute="_densidade", store=True)
     data = fields.Date (string="Data",default=lambda self: fields.Date.today ())  # w3schools lambda function
     data_hora = fields.Datetime(string="Data e Hora", default=lambda self: fields.Datetime.now()) #w3schools lambda function
-    mes_date = fields.Char(compute="_mes_date",size=15,store=False)
-    mes_datetime = fields.Char(compute="_mes_datetime",size=15,store=False)
+    mes_date = fields.Char(compute="_mes_date",size=15,store=True)
+    mes_datetime = fields.Char(compute="_mes_datetime",size=15,store=True)
     foto = fields.Binary(string='Foto')
     adxunto_nome = fields.Char(string="Nome Adxunto")
     adxunto = fields.Binary(string="Arquivo adxunto")
     sexo = fields.Selection([('Home', 'Home'), ('Muller', 'Muller'), ('Outros', 'Outros')], string='Sexo')
     sexo_traducido = fields.Selection([('Hombre', 'Home'), ('Mujer', 'Muller'), ('Otros', 'Outros')], string='Sexo')
 
-
+    _sql_constraints = [('nome unico', 'unique(name)', 'Non se pode repetir o nome')]
 
        #@api.multi é a opción por defecto non temos que declarala
     def boton1(self):  # é necesario engadir no xml da vista no header o botón
@@ -48,12 +48,12 @@ class informacion (models.Model):
             rexistro.autorizado = not rexistro.autorizado
         return True
 
-    @api.depends('data')# permite cambios nunha táboa relacionada
+    @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange
     def _mes_date(self):
         for rexistro in self:
            rexistro.mes_date = rexistro.data.strftime("%B")
 
-    @api.onchange('data_hora')#cambios na mesma táboa
+    @api.onchange('data_hora')#cambios a nivel de form, NON se gardan na BD
     def _mes_datetime(self):
         for rexistro in self:
             rexistro.mes_datetime = rexistro.data_hora.strftime("%B")
@@ -71,7 +71,12 @@ class informacion (models.Model):
     @api.depends ('volume', 'peso')
     def _densidade(self):
         for rexistro in self:
-            rexistro.densidade = 100 * float (rexistro.peso) / float (rexistro.volume)
+            if rexistro.volume != 0:
+                rexistro.densidade = 100 * float (rexistro.peso) / float (rexistro.volume)
+            else:
+                rexistro.densidade = 0
+
+
 
     @api.constrains('peso') #Ao usar constrains temos que importar a libreria ValidationError
     def _constrain_peso(self):
