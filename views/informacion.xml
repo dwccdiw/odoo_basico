@@ -15,11 +15,13 @@
               <field name="name"/>
               <separator colspan="2"/>
             </group>
+          <separator string="Sen col"/>
             <group >
               <field  name="descripcion"/>
               <field  name="autorizado"/>
             </group>
-            <group colspan="5" col="5"> <!-- Ao poñer máis de 4 columnas os fields en lugar de tr pasan a ser td -->
+            <separator string="Con col 5"/>
+            <group  col="5"> <!-- Ao poñer máis de 4 columnas os fields en lugar de tr pasan a ser td -->
               <field  name="descripcion"/>
               <field  name="autorizado"/>
             </group>
@@ -42,7 +44,38 @@
                   </group>
                 </group>
               </page>
-              <page string="Dimensións">
+              <page string="Dimensións sen colspan">
+                <group > <!-- Cada group é unha táboa, por defecto ten 4 columnas. E cada field ocupa 2 columnas unha
+                                    para etiqueta e outra para datos -->
+                  <group />
+                  <group >
+                    <field name="peso"/>
+                    <field name="volume"/>
+                    <field name="densidade" widget="progressbar"/>
+                  </group>
+                  <group   col="10" >
+                    <field name="alto_en_cms"/>
+                    <field name="longo_en_cms"/>
+                    <field name="ancho_en_cms"/>
+                  </group>
+                  <group  col="9" >
+                    <field name="alto_en_cms"/>
+                    <field name="longo_en_cms"/>
+                    <field name="ancho_en_cms"/>
+                  </group>
+                  <group  col="8" > <!-- Cantas máis columnas mais pequeno fai o campo de datos e canto máis pequeno
+                                                           o campo de datos máis grande o de etiqueta-->
+                    <!-- Ao ser dinámico se os datos non caben baixan a fila de abaixo-->
+                    <field name="alto_en_cms"/>
+                    <field name="longo_en_cms"/>
+                    <field name="ancho_en_cms"/>
+                  </group>
+                </group>
+                <group >
+                  <field name="peso"/>
+                </group>
+              </page>
+              <page string="Dimensións con colspan">
                 <group > <!-- Cada group é unha táboa, por defecto ten 4 columnas. E cada field ocupa 2 columnas unha
                                     para etiqueta e outra para datos -->
                   <group />

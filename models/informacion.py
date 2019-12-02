@@ -7,6 +7,8 @@ from odoo.exceptions import ValidationError #Ao usar constrains temos que import
 class informacion (models.Model):
     _name = "odoo_basico.informacion" #IMPORTANTE é o nome da táboa
     _description = "Exemplos de atributos"
+    _order = "data_hora desc"
+    _sql_constraints = [('nome unico', 'unique(name)', 'Non se pode repetir o nome')]
 
     name = fields.Char(required=True,size=20,string="Título")#IMPORTANTE o campo ten que chamarse name para visualizalo
     descripcion = fields.Text(string="A Descripción")
@@ -28,7 +30,7 @@ class informacion (models.Model):
     sexo = fields.Selection([('Home', 'Home'), ('Muller', 'Muller'), ('Outros', 'Outros')], string='Sexo')
     sexo_traducido = fields.Selection([('Hombre', 'Home'), ('Mujer', 'Muller'), ('Otros', 'Outros')], string='Sexo')
 
-    _sql_constraints = [('nome unico', 'unique(name)', 'Non se pode repetir o nome')]
+
 
        #@api.multi é a opción por defecto non temos que declarala
     def boton1(self):  # é necesario engadir no xml da vista no header o botón
