@@ -50,12 +50,13 @@ class informacion (models.Model):
             rexistro.autorizado = not rexistro.autorizado
         return True
 
-    @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange
+    @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange.
+    # Para os campos compute
     def _mes_date(self):
         for rexistro in self:
            rexistro.mes_date = rexistro.data.strftime("%B")
 
-    @api.onchange('data_hora')#cambios a nivel de form, NON se gardan na BD
+    @api.onchange('data_hora')#Se lanza o evento cando temos cambios a nivel de form, NON se gardan na BD.
     def _mes_datetime(self):
         for rexistro in self:
             rexistro.mes_datetime = rexistro.data_hora.strftime("%B")
