@@ -3,6 +3,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import Warning #Ao usar warning temos que importar a libreria
 from odoo.exceptions import ValidationError #Ao usar constrains temos que importar a libreria ValidationError
+import pytz
+from datetime import datetime
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 class informacion (models.Model):
     _name = "odoo_basico.informacion" #IMPORTANTE é o nome da táboa
@@ -44,10 +47,21 @@ class informacion (models.Model):
                     'Altura de %s correcta' % informacion.name)
         return True
 
-    #@api.multi
+
     def boton2(self):  # é necesario engadir no xml da vista no header o botón
         for rexistro in self:
             rexistro.autorizado = not rexistro.autorizado
+        return True
+
+    def boton3(self):  # é necesario engadir no xml da vista no header o botón
+        for rexistro in self:
+            user_tz = pytz.timezone (self.env.user.tz or 'UTC')
+            agora = pytz.UTC.localize (datetime.strptime (
+                fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
+            campo_data_hora = pytz.UTC.localize (datetime.strptime (
+                rexistro.data_hora.strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
+            raise Warning ('Datetime.now()= %s cambiada coa configuración horaria do usuario %s e a do campo data hora %s'
+                       % (fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M'),agora,campo_data_hora.strftime ('%Y-%m-%d %H:%M')))
         return True
 
     @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange.

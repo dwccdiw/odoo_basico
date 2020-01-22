@@ -16,6 +16,7 @@
     'depends': ['base'],
     # always loaded
     'data': [
+        'views/report_informacion.xml',
         'views/factura.xml',
         'views/mezcla_lineas.xml',
         'views/cabeceira.xml',

@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="paperformat_euro_portrait"
+            model="report.paperformat">
+        <field name="name">European A4 Portrait</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="True" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="paperformat_euro_landscape"
+            model="report.paperformat">
+        <field name="name">European A4 Landscape</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="True" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="action_report_informacion"
+            string="Listaxe de Información"
+            model="odoo_basico.informacion" report_type="qweb-pdf"
+            name="odoo_basico.report_informacion_template"
+            paperformat="paperformat_euro_portrait"
+    />
+    <template id="report_informacion_template">
+        <!-- Para ver en formatato Web o informe
+                http://localhost:8069/report/html/odoo_basico.report_informacion_template/2
+             sendo 2 o parametro do rexistro-->
+
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="container">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Peso</th>
+                                    <th class="text-left">Autoriz</th>
+                                    <th class="text-left">Datas</th>
+                                    <th class="text-left">Sexo</th>
+                                    <th class="text-left">Foto</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <t t-set="suma_peso" t-value="0" />
+                                <t t-foreach="docs" t-as="o">
+                                    <tr>
+                                        <td class="text-left">
+                                            <h5><span t-field="o.name" /></h5>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="o.peso" />
+                                            <t t-set="suma_peso" t-value="suma_peso + o.peso" />
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-if="o.autorizado == True">
+                                                <h6>
+                                                    <span>SI</span>
+                                                </h6>
+                                            </t>
+                                            <t t-else ="">
+                                                <h6>
+                                                    <span>NON</span>
+                                                </h6>
+                                            </t>
+                                        </td>
+                                        <td class="text-left">
+                                            <span  t-field="o.data" t-options="{'widget': 'date'}" />
+                                            <span>-</span>
+                                            <span t-field="o.data_hora" t-options="{'widget': 'datetime'}"/>
+                                            <!--   <span t-esc="context_timestamp(o.data_hora).strftime('%Y-%m-%d %H:%M')"/>-->
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="o.sexo" />
+                                        </td>
+<!--                                        <td >-->
+<!--                                            <span t-field="o.foto" t-field-options='{"widget": "image", "style":"width: 45px;height: 45px"}'/>-->
+<!--                                        </td>-->
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-3"> Peso total:</div>
+                            <div class="col-2">
+                                <span t-esc="suma_peso" />
+                            </div>
+                            <div class="col-4"> Outro xeito Peso total:</div>
+                            <div class="col-2">
+                                <span
+                                        t-esc="sum([x.peso for x in docs])"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

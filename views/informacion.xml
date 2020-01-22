@@ -8,6 +8,7 @@
           <header>
             <button name="boton1" type="object" string="Ver altura" />
             <button name="boton2" type="object" string="Autoriza/Non" class="oe_highlight" />
+            <button name="boton3" type="object" string="Datas" class="btn-danger" />
           </header>
           <sheet>
             <group colspan="6" col="6" >
