@@ -40,6 +40,13 @@
             name="odoo_basico.report_informacion_template"
             paperformat="paperformat_euro_portrait"
     />
+
+    <report id="action_report_foto"
+            string="Ficha con foto"
+            model="odoo_basico.informacion" report_type="qweb-pdf"
+            name="odoo_basico.report_foto_template"
+            paperformat="paperformat_euro_landscape"
+    />
     <template id="report_informacion_template">
         <!-- Para ver en formatato Web o informe
                 http://localhost:8069/report/html/odoo_basico.report_informacion_template/2
@@ -57,6 +64,7 @@
                                     <th class="text-left">Autoriz</th>
                                     <th class="text-left">Datas</th>
                                     <th class="text-left">Sexo</th>
+                                    <th class="text-left">Mes</th>
                                     <th class="text-left">Foto</th>
                                 </tr>
                             </thead>
@@ -92,9 +100,9 @@
                                         <td class="text-left">
                                             <span t-field="o.sexo" />
                                         </td>
-<!--                                        <td >-->
-<!--                                            <span t-field="o.foto" t-field-options='{"widget": "image", "style":"width: 45px;height: 45px"}'/>-->
-<!--                                        </td>-->
+                                        <td class="text-left">
+                                            <span t-field="o.mes_date" />
+                                        </td>
                                     </tr>
                                 </t>
                             </tbody>
@@ -113,6 +121,49 @@
                                 />
                             </div>
                         </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_foto_template">
+        <!-- Para ver en formatato Web o informe
+                http://localhost:8069/report/html/odoo_basico.report_informacion_template/2
+             sendo 2 o parametro do rexistro-->
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="container">
+                        <t t-foreach="docs" t-as="o">
+                            <!--                            <div style="page-break-after:always;">-->
+                            <!--                                <div class="row bg-primary">-->
+                            <!--                                    <div class="col-3 text-center">Nome</div>-->
+                            <!--                                    <div class="col-8 text-center">Foto</div>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="row">-->
+                            <!--                                    <div class="col-3">-->
+                            <!--                                        <span t-field="o.name" />-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="col-8 " style="border=10px solid blue; padding=30px;">-->
+                            <!--                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.foto)" style="max-height: 300px;"/>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <t t-if="o.foto">
+                                <div style="page-break-after:always;">
+                                    <div class="row bg-primary" style="margin: auto; width: 50%; padding: 10px;">
+                                        <h3>Descripción</h3>
+                                    </div>
+                                    <div class="row" style="margin: auto; width: 50%; padding: 10px;">
+                                        <h5><span t-field="o.descripcion" /></h5>
+                                    </div>
+                                    <div class="row" style="margin: auto; width: 90%; padding: 10px;">
+                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.foto)" style="max-height: 800px;"/>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
                     </div>
                 </div>
             </t>

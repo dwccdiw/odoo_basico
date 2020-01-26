@@ -22,4 +22,5 @@
     <menuitem id="cabeceira_menu" name="Menú Nivel 2 Pedido" parent="exemplos_menu" action="cabeceira_list_action"/>
     <menuitem id="factura_menu" name="Menú Nivel 2 Factura" parent="exemplos_menu" action="factura_list_action"/>-->
     <menuitem id="mezcla_lineas_menu" name="Menú Nivel 2 Mezcla Lineas" parent="exemplos_menu" action="mezcla_lineas_list_action"/>
+    <menuitem id="contexto_menu" name="Menú Nivel 2 Contexto" parent="exemplos_menu" action="contexto_list_action"/>
 </odoo>

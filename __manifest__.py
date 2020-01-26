@@ -24,6 +24,7 @@
         'views/informacion.xml',
         'views/relacion.xml',
         'views/templates.xml',
+        'views/contexto.xml',
         'views/menu.xml',
         'security/ir.model.access.csv',
     ],

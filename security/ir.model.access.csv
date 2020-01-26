@@ -6,3 +6,4 @@ odoo_basico_cabeceira,odoo_basico.cabeceira,model_odoo_basico_cabeceira,base.gro
 odoo_basico_factura,odoo_basico.factura,model_odoo_basico_factura,base.group_user,1,0,1,1
 odoo_basico_mezcla_lineas,odoo_basico.mezcla_lineas,model_odoo_basico_mezcla_lineas,base.group_user,1,1,1,1
 odoo_basico_linea,odoo_basico.linea,model_odoo_basico_linea,base.group_user,1,1,1,1
+odoo_basico_contexto,odoo_basico.contexto,model_odoo_basico_contexto,base.group_user,1,1,1,1

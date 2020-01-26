@@ -5,6 +5,7 @@ from odoo.exceptions import Warning #Ao usar warning temos que importar a librer
 from odoo.exceptions import ValidationError #Ao usar constrains temos que importar a libreria ValidationError
 import pytz
 from datetime import datetime
+import locale
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 class informacion (models.Model):
@@ -54,10 +55,10 @@ class informacion (models.Model):
         return True
 
     def boton3(self):  # é necesario engadir no xml da vista no header o botón
+        user_tz = pytz.timezone (self.env.user.tz or 'UTC')
+        agora = pytz.UTC.localize (datetime.strptime (
+            fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
         for rexistro in self:
-            user_tz = pytz.timezone (self.env.user.tz or 'UTC')
-            agora = pytz.UTC.localize (datetime.strptime (
-                fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
             campo_data_hora = pytz.UTC.localize (datetime.strptime (
                 rexistro.data_hora.strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
             raise Warning ('Datetime.now()= %s cambiada coa configuración horaria do usuario %s e a do campo data hora %s'
@@ -68,7 +69,9 @@ class informacion (models.Model):
     # Para os campos compute
     def _mes_date(self):
         for rexistro in self:
-           rexistro.mes_date = rexistro.data.strftime("%B")
+           # locale.setlocale(locale.LC_TIME, self.env.context['lang'] + '.utf8')
+           # locale.setlocale (locale.LC_TIME, 'es_ES.utf8')
+           rexistro.mes_date = rexistro.data.strftime ("%B")
 
     @api.onchange('data_hora')#Se lanza o evento cando temos cambios a nivel de form, NON se gardan na BD.
     def _mes_datetime(self):
