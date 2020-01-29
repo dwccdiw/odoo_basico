@@ -123,6 +123,7 @@
           <field name="name"/>
           <field name="descripcion"/>
           <field name="data"/>
+          <field name="mes_date"/>
           <field name="data_hora"/>
           <field name="sexo"/>
           <field name="autorizado"/>

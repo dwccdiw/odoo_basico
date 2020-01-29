@@ -69,8 +69,11 @@ class informacion (models.Model):
     # Para os campos compute
     def _mes_date(self):
         for rexistro in self:
-           # locale.setlocale(locale.LC_TIME, self.env.context['lang'] + '.utf8')
-           # locale.setlocale (locale.LC_TIME, 'es_ES.utf8')
+           if 'lang' in  rexistro.env.context:
+               locale_usuario = rexistro.env.context['lang'] + '.utf8'
+           else:
+               locale_usuario = 'fr_FR.utf8'
+           locale.setlocale(locale.LC_TIME, locale_usuario)
            rexistro.mes_date = rexistro.data.strftime ("%B")
 
     @api.onchange('data_hora')#Se lanza o evento cando temos cambios a nivel de form, NON se gardan na BD.

@@ -10,6 +10,8 @@
           <sheet>
             <group>
               <field name="descripcion_da_liña"/>
+              <field name="data"/>
+              <field name="mes_date"/>
               <field name="name_da_cabeceira"/>
             </group>
           </sheet>
@@ -24,6 +26,8 @@
       <field name="arch" type="xml">
         <tree string="informacion Tree">
           <field name="descripcion_da_liña"/>
+          <field name="data"/>
+          <field name="mes_date"/>
         </tree>
       </field>
     </record>
