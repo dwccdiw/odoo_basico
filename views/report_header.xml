@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!--En /usr/lib/python3/dist-packages/odoo/addons/web/views/-->
+<!--está report_templates.xml que contén: html_container, external_layout, external_layout_standard-->
+
+<odoo>
+    <data>
+        <template id="report_header" inherit_id="web.external_layout_standard">
+            <!--            <xpath expr="//div[@class='header']" position="replace">-->
+            <!--                <div class="header">-->
+            <!--                    <div class="row">-->
+            <!--                        <div class="col-3 mb4">-->
+            <!--                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>-->
+            <!--                        </div>-->
+            <!--                        <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>-->
+            <!--                    </div>-->
+            <!--                    <div t-if="company.logo or company.report_header" class="row zero_min_height">-->
+            <!--                        <div class="col-12">-->
+            <!--                            <div style="border-bottom: 1px solid black;"/>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="row">-->
+            <!--                        <div class="col-6" name="company_address">-->
+            <!--                            <div t-field="company.partner_id"-->
+            <!--                                 t-options='{"widget": "contact", "fields": ["address","name"], "no_marker": true}'-->
+            <!--                            />    &lt;!&ndash; no_marker é un icono&ndash;&gt;-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </xpath>-->
+
+            <xpath expr="//div[@name='company_address']" position="replace">
+                <div class="col-12">
+                    <span t-field="company.partner_id.name" />
+                    <span>,</span>
+                    <span t-field="company.partner_id.street" />
+                    <span>,</span>
+                    <span t-field="company.partner_id.city" />
+                    <span>,</span>
+                    <span t-field="company.partner_id.state_id" />
+                    <span>,</span>
+                    <span t-field="company.partner_id.country_id" />
+                    <span>,</span>
+                    <span> email: </span><span t-field="company.partner_id.email" />
+                    <span t-field="company.partner_id.website" />
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

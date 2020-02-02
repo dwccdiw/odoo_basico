@@ -52,6 +52,7 @@
                 http://localhost:8069/report/html/odoo_basico.report_informacion_template/2
              sendo 2 o parametro do rexistro-->
 
+
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
