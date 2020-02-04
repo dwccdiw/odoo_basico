@@ -4,9 +4,9 @@ from odoo import models, fields, api
 from odoo.exceptions import Warning #Ao usar warning temos que importar a libreria
 from odoo.exceptions import ValidationError #Ao usar constrains temos que importar a libreria ValidationError
 import pytz
-from datetime import datetime
 import locale
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+# from datetime import datetime
+# from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 class informacion (models.Model):
     _name = "odoo_basico.informacion" #IMPORTANTE é o nome da táboa
@@ -54,15 +54,34 @@ class informacion (models.Model):
             rexistro.autorizado = not rexistro.autorizado
         return True
 
+
+
+
+
+
+    # data_hora_utc_string = hora_utc_object.strftime ('%Y-%m-%d %H:%M:%S')  # data hora en formato string
+    # data_hora_utc_object = datetime.strptime (data_hora_utc_string, DEFAULT_SERVER_DATETIME_FORMAT)  # data hora en formato object
+    # return pytz.UTC.localize (data_hora_utc_object).astimezone (usuario_timezone) # hora co horario do usuario en formato object
+
+
+
     def boton3(self):  # é necesario engadir no xml da vista no header o botón
-        user_tz = pytz.timezone (self.env.user.tz or 'UTC')
-        agora = pytz.UTC.localize (datetime.strptime (
-            fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
         for rexistro in self:
-            campo_data_hora = pytz.UTC.localize (datetime.strptime (
-                rexistro.data_hora.strftime ('%Y-%m-%d %H:%M:%S'), DEFAULT_SERVER_DATETIME_FORMAT)).astimezone (user_tz)
-            raise Warning ('Datetime.now()= %s cambiada coa configuración horaria do usuario %s e a do campo data hora %s'
-                       % (fields.Datetime.now ().strftime ('%Y-%m-%d %H:%M'),agora,campo_data_hora.strftime ('%Y-%m-%d %H:%M')))
+            raise Warning ('Contexto: %s ' %  rexistro.env.context) # A env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
+        return True
+ 
+    # Sempre se pasa como primeiro parametro self.
+    # Por iso definimos dos parámetros e ao chamar a función pasamos un
+    def convirte_data_hora_de_utc_a_timezone_do_usuario(self,data_hora_utc_object):# recibe a data hora en formato object
+        usuario_timezone = pytz.timezone (self.env.user.tz or 'UTC')  # obter a zona horaria do usuario
+        return pytz.UTC.localize (data_hora_utc_object).astimezone(usuario_timezone)  # hora co horario do usuario en formato object
+
+    def boton4(self):  # é necesario engadir no xml da vista no header o botón
+        data_hora_usuario_object = self.convirte_data_hora_de_utc_a_timezone_do_usuario(fields.Datetime.now())
+        for rexistro in self:
+            data_hora_do_campo_data_hora = self.convirte_data_hora_de_utc_a_timezone_do_usuario(rexistro.data_hora)
+            raise Warning ('Datetime.now() devolve a hora UTC %s cambiamola coa configuración horaria do usuario %s cambiamos tamén a do campo data_hora %s'
+                       % (fields.Datetime.now().strftime ('%Y-%m-%d %H:%M'),data_hora_usuario_object,data_hora_do_campo_data_hora))
         return True
 
     @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange.
