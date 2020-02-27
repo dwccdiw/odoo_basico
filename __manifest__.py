@@ -13,9 +13,10 @@
     'category': 'Educación',
     'version': '0.1',
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['mail','contacts','account','base'],
     # always loaded
     'data': [
+        'views/accion_planificada.xml',
         'views/report_header.xml',
         'views/report_informacion.xml',
         'views/factura.xml',

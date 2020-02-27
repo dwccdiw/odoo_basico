@@ -69,12 +69,14 @@ class informacion (models.Model):
         for rexistro in self:
             raise Warning ('Contexto: %s ' %  rexistro.env.context) # A env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
         return True
- 
+
     # Sempre se pasa como primeiro parametro self.
     # Por iso definimos dos parámetros e ao chamar a función pasamos un
     def convirte_data_hora_de_utc_a_timezone_do_usuario(self,data_hora_utc_object):# recibe a data hora en formato object
         usuario_timezone = pytz.timezone (self.env.user.tz or 'UTC')  # obter a zona horaria do usuario
         return pytz.UTC.localize (data_hora_utc_object).astimezone(usuario_timezone)  # hora co horario do usuario en formato object
+
+    # operar con datas fields.Date.to_string (datetime.now () + timedelta (days))
 
     def boton4(self):  # é necesario engadir no xml da vista no header o botón
         data_hora_usuario_object = self.convirte_data_hora_de_utc_a_timezone_do_usuario(fields.Datetime.now())
@@ -83,6 +85,26 @@ class informacion (models.Model):
             raise Warning ('Datetime.now() devolve a hora UTC %s cambiamola coa configuración horaria do usuario %s cambiamos tamén a do campo data_hora %s'
                        % (fields.Datetime.now().strftime ('%Y-%m-%d %H:%M'),data_hora_usuario_object,data_hora_do_campo_data_hora))
         return True
+
+    def boton5(self):
+        # from odoo import SUPERUSER_ID
+        # user_admin = self.env['res.user'].browse(SUPERUSER_ID)
+        my_user = self.env.user
+        mail_from = my_user.partner_id.email
+        mail_to = 'antoniocfrv@gmail.com'
+        mail_vals = {
+                    'subject': 'Notificacion de ... ',
+                    'author_id': my_user.id,
+                    'email_from': mail_from,
+                    'email_to': mail_to,
+                    'message_type':'email',
+                    'body_html': 'En la Fecha  se encontraron las'
+        }
+        mail_id = self.env['mail.mail'].create(mail_vals)
+        mail_id.send()
+        return True
+#https://miblogtecnico.wordpress.com/2018/07/25/acciones-planificadas-en-odoo/
+
 
     @api.depends('data')# permite cambios nunha táboa relacionada e os cambios almacenanse na BD a diferencia de onchange.
     # Para os campos compute
@@ -94,6 +116,7 @@ class informacion (models.Model):
                locale_usuario = 'fr_FR.utf8'
            locale.setlocale(locale.LC_TIME, locale_usuario)
            rexistro.mes_date = rexistro.data.strftime ("%B")
+           #rexistro.boton5()
 
     @api.onchange('data_hora')#Se lanza o evento cando temos cambios a nivel de form, NON se gardan na BD.
     def _mes_datetime(self):
