@@ -122,7 +122,7 @@ class informacion (models.Model):
         for rexistro in self:
            if 'lang' in  rexistro.env.context: # Para saber por exemplo cando estamos no caso de templates
                locale_usuario = rexistro.env.context['lang'] + '.utf8'
-               raise Warning ('Contexto: %s ' % rexistro.env.context)
+               #raise Warning ('Contexto: %s ' % rexistro.env.context)
            else:
                locale_usuario = 'fr_FR.utf8'
            locale.setlocale(locale.LC_TIME, locale_usuario)
