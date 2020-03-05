@@ -28,15 +28,30 @@ class informacion (models.Model):
     data_hora = fields.Datetime(string="Data e Hora", default=lambda self: fields.Datetime.now()) #w3schools lambda function
     mes_date = fields.Char(compute="_mes_date",size=15,store=True)
     mes_datetime = fields.Char(compute="_mes_datetime",size=15,store=True)
+    hora_usuario = fields.Char (compute="_hora_usuario", string="Hora Usuario", size=15, store=True)
     foto = fields.Binary(string='Foto')
     adxunto_nome = fields.Char(string="Nome Adxunto")
     adxunto = fields.Binary(string="Arquivo adxunto")
     sexo = fields.Selection([('Home', 'Home'), ('Muller', 'Muller'), ('Outros', 'Outros')], string='Sexo')
     sexo_traducido = fields.Selection([('Hombre', 'Home'), ('Mujer', 'Muller'), ('Otros', 'Outros')], string='Sexo')
 
+    def actualiza_hora(self,obxeto_rexistro):
+        obxeto_rexistro.hora_usuario = self.convirte_data_hora_de_utc_a_timezone_do_usuario (obxeto_rexistro.data_hora).strftime ("%H:%M:%S")
 
 
-       #@api.multi é a opción por defecto non temos que declarala
+    def actualiza_hora_boton(self):
+        self.actualiza_hora (self)# leva self como parametro por que actualiza_hora ten 2 parametros
+        # porque usamos tamén actualiza_hora dende outro modelo e lle pasamos como parametro o rexistro
+
+    @api.depends ('data_hora')
+    def _hora_usuario(self):
+        self.actualiza_hora_boton ()
+
+    def _actualiza_alto(self, rexistro):
+        rexistro.alto_en_cms = 11
+        rexistro.sexo_traducido = "Mujer"
+
+    #@api.multi é a opción por defecto non temos que declarala
     def boton1(self):  # é necesario engadir no xml da vista no header o botón
         self.ensure_one ()
         for informacion in self:
