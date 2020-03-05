@@ -8,6 +8,7 @@
           <header>
             <button name="boton1" type="object" string="Ver altura" />
             <button name="boton2" type="object" string="Autoriza/Non" class="oe_highlight" />
+            <button name="actualiza_hora_boton" type="object" string="Actualiza Hora"  class="oe_highlight"/>
             <button name="boton3" type="object" string="Ver contexto"  />
             <button name="boton4" type="object" string="Datas" class="btn-danger" />
             <button name="boton5" type="object" string="email"  />
@@ -37,6 +38,7 @@
                     <field name="data"/>
                     <field name="mes_date"/>
                     <field name="data_hora"/>
+                    <field name="hora_usuario"/>
                     <field name="mes_datetime"/>
                   </group>
                   <group>
@@ -124,11 +126,13 @@
         <tree string="informacion Tree" decoration-success="autorizado == True" decoration-danger="autorizado == False">
           <field name="name"/>
           <field name="descripcion"/>
+          <field name="alto_en_cms"/>
           <field name="data"/>
           <field name="mes_date"/>
           <field name="data_hora"/>
-          <field name="sexo"/>
+          <field name="sexo_traducido"/>
           <field name="autorizado"/>
+          <field name="hora_usuario"/>
         </tree>
       </field>
     </record>

@@ -70,15 +70,9 @@ class informacion (models.Model):
         return True
 
 
-
-
-
-
     # data_hora_utc_string = hora_utc_object.strftime ('%Y-%m-%d %H:%M:%S')  # data hora en formato string
     # data_hora_utc_object = datetime.strptime (data_hora_utc_string, DEFAULT_SERVER_DATETIME_FORMAT)  # data hora en formato object
     # return pytz.UTC.localize (data_hora_utc_object).astimezone (usuario_timezone) # hora co horario do usuario en formato object
-
-
 
     def boton3(self):  # é necesario engadir no xml da vista no header o botón
         for rexistro in self:
@@ -88,7 +82,8 @@ class informacion (models.Model):
     # Sempre se pasa como primeiro parametro self.
     # Por iso definimos dos parámetros e ao chamar a función pasamos un
     def convirte_data_hora_de_utc_a_timezone_do_usuario(self,data_hora_utc_object):# recibe a data hora en formato object
-        usuario_timezone = pytz.timezone (self.env.user.tz or 'UTC')  # obter a zona horaria do usuario
+        #usuario_timezone = pytz.timezone (self.env.user.tz or 'UTC')  # obter a zona horaria do usuario
+        usuario_timezone = pytz.timezone (self.env.user.tz or 'Australia/Adelaide')  # obter a zona horaria do usuario
         return pytz.UTC.localize (data_hora_utc_object).astimezone(usuario_timezone)  # hora co horario do usuario en formato object
 
     # operar con datas fields.Date.to_string (datetime.now () + timedelta (days))
@@ -125,8 +120,9 @@ class informacion (models.Model):
     # Para os campos compute
     def _mes_date(self):
         for rexistro in self:
-           if 'lang' in  rexistro.env.context:
+           if 'lang' in  rexistro.env.context: # Para saber por exemplo cando estamos no caso de templates
                locale_usuario = rexistro.env.context['lang'] + '.utf8'
+               raise Warning ('Contexto: %s ' % rexistro.env.context)
            else:
                locale_usuario = 'fr_FR.utf8'
            locale.setlocale(locale.LC_TIME, locale_usuario)

@@ -11,3 +11,13 @@ class contexto (models.Model):
     def _get_context(self):
         for rexistro in self:
             rexistro.ver_contexto = dict(rexistro.env.context)
+
+    def actualizaAlto(self):
+         informacion_ids = self.env['odoo_basico.informacion'].search ([('autorizado', '=', True)])
+         for rexistro in informacion_ids:
+             self.env['odoo_basico.informacion']._actualiza_alto (rexistro)
+
+    def actualizaHora(self):
+        informacion_ids = self.env['odoo_basico.informacion'].search ([])
+        for rexistro in informacion_ids:
+            self.env['odoo_basico.informacion'].actualiza_hora (rexistro)

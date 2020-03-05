@@ -6,6 +6,8 @@
             <field name="arch" type="xml">
                 <form string="Formulario Contexto">
                     <header>
+                        <button name="actualizaAlto" type="object" string="Actualiza alto en información" />
+                        <button name="actualizaHora" type="object" string="Actualiza hora usuario en  información" />
                     </header>
                     <sheet>
                         <group>

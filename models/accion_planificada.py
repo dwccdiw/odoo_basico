@@ -1,16 +1,24 @@
 from odoo import models, fields, api
+from odoo.exceptions import Warning
 
 class accion_planificada(models.Model):
     _name = 'account.invoice'
     _inherit ='account.invoice'
 
-
     @api.model
     def listado_facturas(self, id=None):
+        informacion_ids = self.env['odoo_basico.informacion'].search([('autorizado','=',False)])
+        # from odoo.exceptions import Warning
+        # raise Warning ('Cantos %s ' % len(informacion_ids))
+        for rexistro in informacion_ids:
+            self.env['odoo_basico.informacion']._actualiza_alto(rexistro)
         date_act = fields.Datetime.now ()
         facturas_ids = self.search ([('state', '=', 'open')])
         if facturas_ids:
-            listado = [(x.number,x.partner_id.display_name, x.amount_total) for x in facturas_ids]
+            #listado = [(x.number,x.partner_id.display_name, x.amount_total) for x in facturas_ids]
+            listado = ""
+            for rexistro in facturas_ids:
+                listado = listado + "<br/>" + str(rexistro.number)+ "-> "+str(rexistro.partner_id.display_name)+ "-> "+str(rexistro.amount_total)
             # from odoo import SUPERUSER_ID
             # user_admin = self.env['res.users'].browse (SUPERUSER_ID)
             # mail_to = user_admin.partner_id.email

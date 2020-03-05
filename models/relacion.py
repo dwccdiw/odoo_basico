@@ -30,3 +30,6 @@ class relacion (models.Model):
     #    for rexistro in self:
     #      rexistro.moeda_euro_id = rexistro.env['res.currency'].search ([('name', '=', "EUR")], limit=1)
     nome_creador_moeda = fields.Char (related='moeda_id.create_uid.login', string="Creador Moeda",store=True)
+
+
+
