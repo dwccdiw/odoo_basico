@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import Warning
 
 class accion_planificada(models.Model):
-    _name = 'account.invoice'
+    #_name = 'account.invoice'
     _inherit ='account.invoice'
 
     @api.model
@@ -24,7 +24,8 @@ class accion_planificada(models.Model):
             # mail_to = user_admin.partner_id.email
             my_user = self.env.user
             mail_from = my_user.partner_id.email
-            mail_to = 'antoniocfrv@gmail.com'
+           # mail_to = 'antoniocfrv@gmail.com'
+            mail_to = 'antoniocrespo@edu.xunta.es'
             mail_vals = {
                 'subject': 'Listado de Facturas a dia de hoxe %s' % date_act,
                 'author_id': my_user.id,

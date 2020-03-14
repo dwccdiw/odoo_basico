@@ -43,6 +43,11 @@ class informacion (models.Model):
         self.actualiza_hora (self)# leva self como parametro por que actualiza_hora ten 2 parametros
         # porque usamos tamén actualiza_hora dende outro modelo e lle pasamos como parametro o rexistro
 
+    # @api.depends ('data_hora')
+    # def _hora_usuario(self):
+    #     for rexistro in self:
+    #         rexistro.actualiza_hora_boton ()
+
     @api.depends ('data_hora')
     def _hora_usuario(self):
         self.actualiza_hora_boton ()
@@ -111,7 +116,7 @@ class informacion (models.Model):
                     'body_html': 'En la Fecha  se encontraron las'
         }
         mail_id = self.env['mail.mail'].create(mail_vals)
-        mail_id.send()
+        mail_id.sudo().send()
         return True
 #https://miblogtecnico.wordpress.com/2018/07/25/acciones-planificadas-en-odoo/
 
@@ -124,9 +129,12 @@ class informacion (models.Model):
                locale_usuario = rexistro.env.context['lang'] + '.utf8'
                #raise Warning ('Contexto: %s ' % rexistro.env.context)
            else:
-               locale_usuario = 'fr_FR.utf8'
+               locale_usuario = 'es_ES.utf8'
+               #locale_usuario = 'fr_FR.utf8'
            locale.setlocale(locale.LC_TIME, locale_usuario)
            rexistro.mes_date = rexistro.data.strftime ("%B")
+
+
            #rexistro.boton5()
 
     @api.onchange('data_hora')#Se lanza o evento cando temos cambios a nivel de form, NON se gardan na BD.
