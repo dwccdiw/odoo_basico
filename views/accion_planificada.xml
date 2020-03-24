@@ -1,6 +1,6 @@
 <odoo>
   <data>
-<!--    https://odoo-development.readthedocs.io/en/latest/odoo/models/ir.cron.html-->
+    <!--    https://odoo-development.readthedocs.io/en/latest/odoo/models/ir.cron.html-->
     <record  id="envio_facturas" model="ir.cron">
       <field name="name">Revisión de Facturas</field>
       <field name="active" eval="True"  />
@@ -9,10 +9,10 @@
       <field name="interval_type">hours</field>
       <field name="numbercall">-1</field> <!--  An integer value specifying how many times the job is executed. A negative value means no limit.-->
       <field name="model_id" ref="model_account_invoice" />
-      <field name="function">model.listado_facturas()</field>
-<!-- <field name="function">True</field>
-     <field name="state">code</field>
-     <field name="code">model.listado_facturas()</field>-->
+      <!--      <field name="function">model.listado_facturas()</field>-->
+      <field name="function">True</field>
+      <field name="state">code</field>
+      <field name="code">model.listado_facturas()</field>
       <field name="doall" eval="False" /> <!--      A boolean value indicating whether missed occurrences should be executed when the server restarts-->
     </record>
   </data>
