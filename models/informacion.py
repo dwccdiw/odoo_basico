@@ -56,7 +56,7 @@ class informacion(models.Model):
                if rexistro.alto_en_cms > 7:
                     rexistro.literal = 'O alto ten un valor posiblemente excesivo %s é maior que 7' % rexistro.alto_en_cms
                else:
-                    rexistro.literal = ""
+                    rexistro.literal = "1"
 
      @api.constrains('peso')  # Ao usar ValidationError temos que importar a libreria ValidationError
      def _constrain_peso(self):  # from odoo.exceptions import ValidationError
