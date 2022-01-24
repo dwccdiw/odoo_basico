@@ -3,6 +3,8 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from odoo.exceptions import Warning
+import os
 
 
 class informacion(models.Model):
@@ -64,3 +66,11 @@ class informacion(models.Model):
 
       def _cambia_campo_sexo(self, rexistro):
            rexistro.sexo_traducido = "Hombre"
+
+      def ver_contexto(self):  # Este método é chamado dende un botón de informacion.xml
+          for rexistro in self:
+              # Ao usar warning temos que importar a libreria mediante from odoo.exceptions import Warning
+              # Importamos tamén a libreria os mediante import os
+              raise Warning('Contexto: %s Ruta: %s Contido do directorio %s' % (rexistro.env.context, os.getcwd(), os.listdir(os.getcwd())))
+              # env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
+          return True
