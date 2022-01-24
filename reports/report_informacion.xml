@@ -66,10 +66,23 @@
                                                 <t t-set="suma_peso" t-value="suma_peso + o.peso" />
                                             </t>
                                         </td>
+                                        <td class="text-left">
+                                            <t t-if="o.autorizado == True">
+                                                <span>SI</span>
+                                            </t>
+                                            <t t-else="">
+                                                <span>NON</span>
+                                            </t>
+                                        </td>
+                                        <td class="text-left">
+                                            <h5><span t-field="o.sexo_traducido" /></h5>
+                                        </td>
                                     </tr>
                                 </t>
                                 <td class="text-left"><span>Suma de pesos maior a 3 </span></td>
                                 <td class="text-left"><span t-esc="suma_peso"/></td>
+                                <td class="text-left"><span>Total Pesos: </span></td>
+                                <td class="text-left"><span t-esc="sum([x.peso for x in docs])"/> </td>
                             </tbody>
                         </table>
                     </div>
