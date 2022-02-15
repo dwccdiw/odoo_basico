@@ -135,36 +135,37 @@ class informacion(models.Model):
           # Podemos cambialo con locale.setlocale, os idiomas teñen que estar instalados na máquina onde se executa odoo.
           # Lista onde podemos ver os distintos valores: https://docs.moodle.org/dev/Table_of_locales#Table
           # Definimos en miñasUtilidades un método para asignar o distinto literal que ten o idioma en función da plataforma Windows ou GNULinux
-          locale.setlocale(locale.LC_TIME,
-                           miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
-          for rexistro in self:
-              rexistro.mes_castelan = rexistro.data.strftime("%B")  # strftime https://strftime.org/
-
+          # locale.setlocale(locale.LC_TIME,
+          #                  miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
+          # for rexistro in self:
+          #     rexistro.mes_castelan = rexistro.data.strftime("%B")  # strftime https://strftime.org/
+          pass
       @api.depends('data')
       def _mes_galego(self):
           # O idioma por defecto é o configurado en locale na máquina onde se executa odoo.
           # Podemos cambialo con locale.setlocale, os idiomas teñen que estar instalados na máquina onde se executa odoo.
           # Lista onde podemos ver os distintos valores: https://docs.moodle.org/dev/Table_of_locales#Table
           # Definimos en miñasUtilidades un método para asignar o distinto literal que ten o idioma en función da plataforma Windows ou GNULinux
-          locale.setlocale(locale.LC_TIME,
-                           miñasUtilidades.cadeaTextoSegunPlataforma('Galician_Spain.1252', 'gl_ES.utf8'))
-          for rexistro in self:
-              rexistro.mes_galego = rexistro.data.strftime("%B")
-          locale.setlocale(locale.LC_TIME,
-                           miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
-
+          # locale.setlocale(locale.LC_TIME,
+          #                  miñasUtilidades.cadeaTextoSegunPlataforma('Galician_Spain.1252', 'gl_ES.utf8'))
+          # for rexistro in self:
+          #     rexistro.mes_galego = rexistro.data.strftime("%B")
+          # locale.setlocale(locale.LC_TIME,
+          #                  miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
+          pass
       @api.depends('data')
       def _mes_frances(self):
           # O idioma por defecto é o configurado en locale na máquina onde se executa odoo.
           # Podemos cambialo con locale.setlocale, os idiomas teñen que estar instalados na máquina onde se executa odoo.
           # Lista onde podemos ver os distintos valores: https://docs.moodle.org/dev/Table_of_locales#Table
           # Definimos en miñasUtilidades un método para asignar o distinto literal que ten o idioma en función da plataforma Windows ou GNULinux
-          locale.setlocale(locale.LC_TIME,
-                           miñasUtilidades.cadeaTextoSegunPlataforma('French_France.1252', 'fr_FR.utf8'))
-          for rexistro in self:
-              rexistro.mes_frances = rexistro.data.strftime("%B")
-          locale.setlocale(locale.LC_TIME,
-                           miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
+          # locale.setlocale(locale.LC_TIME,
+          #                  miñasUtilidades.cadeaTextoSegunPlataforma('French_France.1252', 'fr_FR.utf8'))
+          # for rexistro in self:
+          #     rexistro.mes_frances = rexistro.data.strftime("%B")
+          # locale.setlocale(locale.LC_TIME,
+          #                  miñasUtilidades.cadeaTextoSegunPlataforma('Spanish_Spain.1252', 'es_ES.utf8'))
+          pass
 
       def envio_email(self):
           meu_usuario = self.env.user
