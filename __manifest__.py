@@ -20,10 +20,11 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','account'],
 
     # always loaded
     'data': [
+        'accions_planificadas/accion_planificada.xml',
         'views/persoa.xml',
         'views/pedido.xml',
         'views/lineapedido.xml',
