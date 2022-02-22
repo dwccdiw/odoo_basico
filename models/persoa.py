@@ -14,8 +14,8 @@ class persoa (models.Model):
    # O campo visible serve para visualizar só  os rexistros  que nos interesan domain="[('visible', '=','True')]"
    # Engadimos na relación many2one ou many2many unha condición
 
-   # Temos que dar permisos en ir.model.access.csv para o model res_partner.
-   # Engadir a liña:
+   # Temos que dar permisos en ir.m
+   # odel.access.csv para o model res_partner.   # Engadir a liña:
    # odoo_basico_res_partner,odoo_basico.res_partner,model_res_partner,base.group_user,1,1,1,1
 
    def name_get(self):  # sobrescribimos o método name_get da clase res.partner

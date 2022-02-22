@@ -24,6 +24,7 @@
 
     # always loaded
     'data': [
+        'security/xestion_usuarios.xml',
         'accions_planificadas/accion_planificada.xml',
         'views/persoa.xml',
         'views/pedido.xml',
