@@ -13,7 +13,7 @@ from . import miñasUtilidades
 class informacion(models.Model):
       _name = 'odoo_basico.informacion'
       _description = 'Exemplo de odoo basico'
-      _sql_constraints = [('nomeUnico', 'unique(name)', 'Non se pode repetir o Título')]
+      _sql_constraints = [('nomeUnico', 'unique(name)', 'O Título xa existe na Base de Datos')]
       _order = "descripcion desc"
 
       name = fields.Char(string="Título:")
@@ -21,9 +21,9 @@ class informacion(models.Model):
       alto_en_cms = fields.Integer(string="Alto en Centímetros")
       longo_en_cms = fields.Integer(string="Longo en Centímetros")
       ancho_en_cms = fields.Integer(string="Ancho en Centímetros")
-      volume = fields.Float(compute="_volume", store=True)
+      volume = fields.Float(digits=(6,7),compute="_volume", store=True, string="Volume m3")
       peso = fields.Float(string="Peso en Kgs.",default=2.7,digits=(6,2))
-      densidade = fields.Float(compute="_densidade", store=True)
+      densidade = fields.Float(compute="_densidade", store=True, string="Densidade en KG/m3:")
       literal = fields.Char(store=False)
       autorizado = fields.Boolean(string="¿Autorizado?", default=True)
       sexo_traducido = fields.Selection([('Hombre','Home'),('Mujer','Muller'),('Otros','Outros')],string="Sexo")
@@ -49,18 +49,18 @@ class informacion(models.Model):
       mes_frances = fields.Char(compute="_mes_frances", size=15,  string="Mes francés", store=True)
 
 
-      @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
-      def _volume(self):
-           for rexistro in self:
-                rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)
+    @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
+    def _volume(self):
+        for rexistro in self:
+            rexistro.volume = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)) / 1000000
 
-      @api.depends('volume', 'peso')
-      def _densidade(self):
-           for rexistro in self:
-                if rexistro.volume !=0:
-                     rexistro.densidade = 1000000 * (float(rexistro.peso) / float(rexistro.volume))
-                else:
-                     rexistro.densidade = 0
+    @api.depends('volume', 'peso')
+    def _densidade(self):
+        for rexistro in self:
+            if rexistro.volume != 0:
+                rexistro.densidade = (float(rexistro.peso) / float(rexistro.volume))
+            else:
+                rexistro.densidade = 0
 
       @api.onchange('alto_en_cms')
       def _avisoAlto(self):
