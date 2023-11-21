@@ -58,7 +58,7 @@ class informacion(models.Model):
       def _densidade(self):
            for rexistro in self:
                 if rexistro.volume !=0:
-                     rexistro.densidade = 100 * (float(rexistro.peso) / float(rexistro.volume))
+                     rexistro.densidade = 1000000 * (float(rexistro.peso) / float(rexistro.volume))
                 else:
                      rexistro.densidade = 0
 
