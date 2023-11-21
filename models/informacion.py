@@ -49,26 +49,26 @@ class informacion(models.Model):
       mes_frances = fields.Char(compute="_mes_frances", size=15,  string="Mes francés", store=True)
 
 
-    @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
-    def _volume(self):
-        for rexistro in self:
-            rexistro.volume = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)) / 1000000
+     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
+     def _volume(self):
+          for rexistro in self:
+               rexistro.volume = (float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)) / 1000000
 
-    @api.depends('volume', 'peso')
-    def _densidade(self):
-        for rexistro in self:
-            if rexistro.volume != 0:
-                rexistro.densidade = (float(rexistro.peso) / float(rexistro.volume))
-            else:
-                rexistro.densidade = 0
+     @api.depends('volume', 'peso')
+     def _densidade(self):
+          for rexistro in self:
+               if rexistro.volume != 0:
+                   rexistro.densidade = (float(rexistro.peso) / float(rexistro.volume))
+               else:
+                   rexistro.densidade = 0
 
       @api.onchange('alto_en_cms')
       def _avisoAlto(self):
            for rexistro in self:
                 if rexistro.alto_en_cms > 7:
-                     rexistro.literal = 'O alto ten un valor posiblemente excesivo %s é maior que 7' % rexistro.alto_en_cms
+                    rexistro.literal = 'O alto ten un valor posiblemente excesivo %s é maior que 7' % rexistro.alto_en_cms
                 else:
-                     rexistro.literal = ""
+                    rexistro.literal = ""
 
       @api.constrains('peso')  # Ao usar ValidationError temos que importar a libreria ValidationError
       def _constrain_peso(self):  # from odoo.exceptions import ValidationError
